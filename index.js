@@ -164,7 +164,7 @@ app.get("/api/playlists/:ref", (req, resp) => {
 
 app.get("/api/mood/dancing/:ref", (req, resp) => {
  let  sql = "SELECT s.song_id, s.title, a.artist_id, a.artist_name, g.genre_id, g.genre_name, s.year, s.bpm, s.energy, s.danceability, s.loudness, s.liveness, s.valence, s.duration, s.acousticness, s.speechiness, s.popularity FROM songs s JOIN artists a ON s.artist_id = a.artist_id JOIN genres g ON s.genre_id = g.genre_id ORDER BY s.danceability DESC LIMIT CASE WHEN ? BETWEEN 1 AND 20 THEN ? ELSE 20 END;";
-  db.all(sql, [req.params.ref], (err, rows) => {
+  db.all(sql, [req.params.ref,req.params.ref], (err, rows) => {
     if (err) {
       throw err;
     }
@@ -176,7 +176,7 @@ app.get("/api/mood/dancing/:ref", (req, resp) => {
 
 app.get("/api/mood/happy/:ref", (req, resp) => {
  let  sql = "SELECT s.song_id, s.title, a.artist_id, a.artist_name, g.genre_id, g.genre_name, s.year, s.bpm, s.energy, s.danceability, s.loudness, s.liveness, s.valence, s.duration, s.acousticness, s.speechiness, s.popularity FROM songs s JOIN artists a ON s.artist_id = a.artist_id JOIN genres g ON s.genre_id = g.genre_id ORDER BY s.valence DESC LIMIT CASE WHEN ? BETWEEN 1 AND 20 THEN ? ELSE 20 END;";
-  db.all(sql, [req.params.ref], (err, rows) => {
+  db.all(sql, [req.params.ref,req.params.ref], (err, rows) => {
     if (err) {
       throw err;
     }
@@ -188,7 +188,7 @@ app.get("/api/mood/happy/:ref", (req, resp) => {
 
 app.get("/api/mood/coffee/:ref", (req, resp) => {
  let  sql = "SELECT s.song_id, s.title, a.artist_id, a.artist_name, g.genre_id, g.genre_name, s.year, s.bpm, s.energy, s.danceability, s.loudness, s.liveness, s.valence, s.duration, s.acousticness, s.speechiness, s.popularity FROM songs s JOIN artists a ON s.artist_id = a.artist_id JOIN genres g ON s.genre_id = g.genre_id ORDER BY (s.liveness / NULLIF(s.acousticness, 0)) DESC LIMIT CASE WHEN ? BETWEEN 1 AND 20 THEN ? ELSE 20 END;";
-  db.all(sql, [req.params.ref], (err, rows) => {
+  db.all(sql, [req.params.ref,req.params.ref], (err, rows) => {
     if (err) {
       throw err;
     }
@@ -200,7 +200,7 @@ app.get("/api/mood/coffee/:ref", (req, resp) => {
 
 app.get("/api/mood/studying/:ref", (req, resp) => {
  let  sql = "SELECT s.song_id, s.title, a.artist_id, a.artist_name, g.genre_id, g.genre_name, s.year, s.bpm, s.energy, s.danceability, s.loudness, s.liveness, s.valence, s.duration, s.acousticness, s.speechiness, s.popularity FROM songs s JOIN artists a ON s.artist_id = a.artist_id JOIN genres g ON s.genre_id = g.genre_id ORDER BY (s.energy * s.speechiness) ASC LIMIT CASE WHEN ? BETWEEN 1 AND 20 THEN ? ELSE 20 END;";
-  db.all(sql, [req.params.ref], (err, rows) => {
+  db.all(sql, [req.params.ref,req.params.ref], (err, rows) => {
     if (err) {
       throw err;
     }
